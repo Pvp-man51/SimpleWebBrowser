@@ -1,3 +1,4 @@
+from PyQt5.Qt import *
 from PyQt5.QtCore import *
 from PyQt5.QtWidgets import *
 from PyQt5.QtGui import *
@@ -139,7 +140,7 @@ class MainWindow(QMainWindow):
         help_menu.addAction(about_action)
 
         navigate_help_action = QAction(QIcon(os.path.join("images", "GitHub-Mark-32px.png")),
-                                            "Github", self)
+                                       "Github", self)
         navigate_help_action.setStatusTip("Go to Chrome (Scuffed Edition)'s Github page")
         navigate_help_action.triggered.connect(self.navigate_github)
         help_menu.addAction(navigate_help_action)
@@ -199,12 +200,11 @@ class MainWindow(QMainWindow):
 
     def open_file(self):
         filename, _ = QFileDialog.getOpenFileName(self, "Open file", "",
-                                                  "Hypertext Markup Language (*.htm *.html);;"
-                                                  "Portable Document Format (*.pdf);;"
-                                                  "Text Document (*.txt);;"
+                                                  "Hypertext markup language (*.htm *.html);;"
+                                                  "Text document (*.txt);;"
                                                   "All files (*.*)")
         if filename:
-            with open(filename, 'r') as f:
+            with open(filename, "r") as f:
                 html = f.read()
 
             self.tabs.currentWidget().setHtml(html)
@@ -215,10 +215,9 @@ class MainWindow(QMainWindow):
         self.htmlFinished.emit()
 
     def save_file(self):
-        filename, _ = QFileDialog.getSaveFileName(self, "Save Page As", f"{self.tabs.currentWidget().url()}.html",
-                                                  "Hypertext Markup Language (*.htm *.html);;"
-                                                  "Portable Document Format (*.pdf);;"
-                                                  "Text Document (*.txt);;"
+        filename, _ = QFileDialog.getSaveFileName(self, "Save Page As", "Site.html",
+                                                  "Hypertext markup lLanguage (*.htm *.html);;"
+                                                  "Text document (*.txt);;"
                                                   "All files (*.*)")
         if filename:
             self.tabs.currentWidget().page().toHtml(self.callback)
